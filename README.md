@@ -6,6 +6,7 @@ This implementation (referred to as ASMC-DREAM) uses the code presented by Laloy
 
 ## Test cases
 CM1: binary channelized training image (CM1) (Zahner et al., 2016) 
+
 CM2: tri-categorical training image representing braided-river aquifer deposits (Pirot et al., 2015).
 
 ## Codes and files
