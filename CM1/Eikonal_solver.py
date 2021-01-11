@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on %(date)s
-
-@author: %(Shiran Levy)s
 """
 from ctypes import *
 import numpy as np
