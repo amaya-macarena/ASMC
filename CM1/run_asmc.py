@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 References:
 
-Amaya, M., Linde, N., Laloy, E. (under review). Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
+Amaya, M., Linde, N., Laloy, E. under review. Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
 encoded with deep generative neural networks [submitted to Geophysical Journal International on December 2020].
 
 Laloy, E., Hérault, R., Jacques, D., and Linde, N. 2018. Training-image based geostatistical inversion using
@@ -40,10 +40,10 @@ a spatial generative adversarial neural network. Water Resources Research, 54, 3
 Podvin, P. & Lecomte, I., 1991.  Finite difference computation of traveltimes in very contrasted velocity models: 
 a massively parallel approach and its associated tools,Geophysical Journal International,105(1), 271–284
 
-Ter Braak, C. J., & Vrugt, J. A. (2008). Differential evolution Markov chain with snooker updater and fewer chains. 
+Ter Braak, C. J., & Vrugt, J. A. 2008. Differential evolution Markov chain with snooker updater and fewer chains. 
 Statistics and Computing, 18(4), 435-446.
 
-Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. (2009). Accelerating Markov chain Monte Carlo simulation by
+Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. 2009. Accelerating Markov chain Monte Carlo simulation by
 differential evolution with self-adaptive randomized subspace sampling. International Journal of Nonlin ear Sciences and Numerical Simu-
 lation, 10(3), 273–290.
           
