@@ -60,15 +60,11 @@ work_dir=os.getcwd()
 
 import asmc
 
-#% Set random seed and case study
-
-#rng_seed=12345
-
-CaseStudy=1
+CaseStudy=1  # Channelized conceptual model (CM1)
 Restart=False
     
 
-if  CaseStudy==1: # Channelized conceptual model (CM1)
+if  CaseStudy==1: 
     
     # User defined parameters:
     
