@@ -117,9 +117,9 @@ if __name__ == '__main__':
     Sequences, Z, OutDiag, fx, MCMCPar, MCMCVar, beta_run, jr_seq, weig_seq, CESS_ev, increment, ESS_ev, evid_cont, evid_ev, weights_unnorm, new_weight_ev, weig_cont = q.sample(RestartFilePath=tmpFilePath)
     
     
-    np.save('Sequences_states2',Sequences) # Evolution of the states for every particle (latent parameters) and its likelihood
-    np.save('AR2',OutDiag.AR) # Acceptance Rate
-    np.save('beta_seq2',beta_run) # Sequence that defines the intermediate distributions (resulting from the adaptive procedure) 
-    np.save('jr_ev2',jr_seq) # Proposal scale evolution
-    np.save('weig_ev2',weig_seq) # Weights evolution	 	
-    np.save('evid_ev2',evid_ev) # Evidence evolution
+    np.save('Sequences_states',Sequences) # Evolution of the states for every particle (latent parameters) and its likelihood
+    np.save('AR',OutDiag.AR) # Acceptance Rate
+    np.save('beta_seq',beta_run) # Sequence that defines the intermediate distributions (resulting from the adaptive procedure) 
+    np.save('jr_ev',jr_seq) # Proposal scale evolution
+    np.save('weig_ev',weig_seq) # Weights evolution	 	
+    np.save('evid_ev',evid_ev) # Evidence evolution
