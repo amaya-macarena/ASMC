@@ -12,6 +12,7 @@ In case you have any question and/or if you find a problem, please wirte me an e
 ===
 
 Copyright (C) 2018  Eric Laloy 
+[for the codes on Laloy et al. (2018)]
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
