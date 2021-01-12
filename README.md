@@ -1,8 +1,7 @@
 # Adaptive Sequential Monte Carlo (ASMC) python codes for posterior inference and evidence computation 
+Python 3.7 implementation of the Adaptive Sequential Monte Carlo method presented in Amaya et al. (under review), a particle approach to infer the posterior probability density function and compute de evidence (marginal likelihood) introduced by in Zhou et al (2016) [algorithm 4]. This method relies on importance sampling over a sequence of intermediate distributions, linking the prior and the posterior PDF. Each distribution is approximated by updating the particle weights and states, compared with the previous approximation, using a small pre-defined number MCMC proposal steps. ASMC method adaptively selects the sequence of distributions and performs resampling of particles when the variance of the particle weights becomes too large.
 
-Python 3.7 implementation of the Adaptive Sequential Monte Carlo method presented in Amaya et al. (under review), a particle approach to infer the posterior probability density function and compute de evidence (marginal likelihood) introduced by in Zhou et al (2016) [algorithm 4]. 
-
-This implementation (referred to as ASMC-DREAM) uses the code presented by Laloy et al. (2018) for GAN-based probabilistic inversion using DREAMzs MCMC sampler (ter Braak and Vrugt, 2008; Vrugt, 2009; Laloy and Vrugt, 2012). The associated synthetic cross-hole ground penetrating radar (GPR) tomography data first-arrival times are calculated using the time2d algorithm by Podvin & Lecomte (1991).
+This implementation (referred to as ASMC-DREAM) uses the code presented by Laloy et al. (2018) for GAN-based probabilistic inversion using DREAMzs MCMC sampler to propose the MCMC steps (ter Braak and Vrugt, 2008; Vrugt, 2009; Laloy and Vrugt, 2012). The associated synthetic cross-hole ground penetrating radar (GPR) tomography data first-arrival times are calculated using the time2d algorithm by Podvin & Lecomte (1991).
 
 ## Test cases
 CM1: binary channelized training image (CM1) (Zahner et al., 2016) 
@@ -71,6 +70,7 @@ Monte Carlo approach, Journal of Computational and Graphical Statistics,69925(3)
 
 
 ## License
+See LICENSE.txt
 
 
 ## Contact
