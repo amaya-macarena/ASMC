@@ -9,47 +9,33 @@ penetrating radar (GPR) tomography data first-arrival times are calculated using
 
 In case you have any question and/or if you find a problem, please wirte me an email to macarena.amaya@unil.ch. 
 
-===
-
-Copyright (C) 2018  Eric Laloy 
-[for the codes on Laloy et al. (2018)]
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 ===                               
 
 References:
 
-Amaya, M., Linde, N., Laloy, E. under review. Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
+Amaya, M., Linde, N., Laloy, E. (under review). Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
 encoded with deep generative neural networks [submitted to Geophysical Journal International on December 2020].
 
-Laloy, E., Hérault, R., Jacques, D., and Linde, N. 2018. Training-image based geostatistical inversion using
+Laloy, E., & Vrugt, J. A. (2012). High‐dimensional posterior exploration of hydrologic models using multiple‐try DREAM (ZS) and high‐performance computing. 
+Water Resources Research, 48(1).
+
+Laloy, E., Hérault, R., Jacques, D., and Linde, N. (2018). Training-image based geostatistical inversion using
 a spatial generative adversarial neural network. Water Resources Research, 54, 381–406. https://doi.org/10.1002/2017WR022148.
 
-Podvin, P. & Lecomte, I., 1991.  Finite difference computation of traveltimes in very contrasted velocity models: 
+Podvin, P. & Lecomte, I., (1991).  Finite difference computation of traveltimes in very contrasted velocity models: 
 a massively parallel approach and its associated tools,Geophysical Journal International,105(1), 271–284
 
-Ter Braak, C. J., & Vrugt, J. A. 2008. Differential evolution Markov chain with snooker updater and fewer chains. 
+Ter Braak, C. J., & Vrugt, J. A. (2008). Differential evolution Markov chain with snooker updater and fewer chains. 
 Statistics and Computing, 18(4), 435-446.
 
-Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. 2009. Accelerating Markov chain Monte Carlo simulation by
+Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. (2009). Accelerating Markov chain Monte Carlo simulation by
 differential evolution with self-adaptive randomized subspace sampling. International Journal of Nonlin ear Sciences and Numerical Simu-
 lation, 10(3), 273–290.
           
-Zhou,  Y.,  Johansen,  A.  M.,  &  Aston,  J.  A.,  2016.   Toward  automatic  model  comparison:  an adaptive sequential 
+Zhou,  Y.,  Johansen,  A.  M.,  &  Aston,  J.  A.,  (2016).   Toward  automatic  model  comparison:  an adaptive sequential 
 Monte Carlo approach, Journal of Computational and Graphical Statistics,69925(3), 701–726.                                                                                                                                                                                                                             
 """
+
 
 import os
 import time
@@ -68,18 +54,18 @@ if  CaseStudy==1:
     
     # User defined parameters:
     
-    seq=1 # Number of particles (N)
-    thin=5  # Thinning parameter, rate for saving MCMC steps  
-    steps=5 # Iterations per intermediate distribution (K)
+    seq=40 # Number of particles (N)
+    thin=20  # Thinning parameter, rate for saving MCMC steps  
+    steps=20 # Iterations per intermediate distribution (K)
     jr_scale=10 # Starting value for de proposal scale
-    CESSf_div=0.99 # targeted CESS (CESS_op) 
+    CESSf_div=0.999993 # targeted CESS (CESS_op) 
     ESSf_div=0.5 # ESS treshold (ESS*) 
     AR_min=25.0 # Min acceptance rate before decreasing jr_scale
     jr_factor=0.2 # Fraction of the jr_scale that is decrease when the accepatnce rate gets lower than AR_min [0,1]
     
     
     
-    ndraw=seq*3000000 # Set a high number of iterations to stop in case the beta sequence becomes too long due to a bad choice of CESS  
+    ndraw=seq*1000000 # Set a high number of iterations to stop in case the beta sequence becomes too long due to a bad choice of CESS  
     it_b=steps 
     
     #Decide if to run forward solver in parallel
