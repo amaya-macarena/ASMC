@@ -45,28 +45,33 @@ encoded with deep generative neural networks [submitted to Geophysical Journal I
 
 
 ## References:
-Amaya, M., Linde, N., Laloy, E. under review. Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
+Amaya, M., Linde, N., Laloy, E. (under review). Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
 encoded with deep generative neural networks [submitted to Geophysical Journal International on December 2020].
 
-Laloy, E., Hérault, R., Jacques, D., and Linde, N. 2018. Training-image based geostatistical inversion using
+Laloy, E., & Vrugt, J. A. (2012). High‐dimensional posterior exploration of hydrologic models using multiple‐try DREAM (ZS) and high‐performance computing. 
+Water Resources Research, 48(1).
+
+Laloy, E., Hérault, R., Jacques, D., and Linde, N. (2018). Training-image based geostatistical inversion using
 a spatial generative adversarial neural network. Water Resources Research, 54, 381–406. https://doi.org/10.1002/2017WR022148.
 
-Pirot, G., Straubhaar, J., & Renard, P., 2015.   A pseudo genetic model of coarse braided-river deposits, Water Resources Research,51(12), 9595–9611.
+Pirot, G., Straubhaar, J., & Renard, P., (2015).   A pseudo genetic model of coarse braided-river deposits, Water Resources Research,51(12), 9595–9611.
 
-Podvin, P. & Lecomte, I., 1991.  Finite difference computation of traveltimes in very contrasted velocity models: 
-a massively parallel approach and its associated tools,Geophysical Journal International,105(1), 271–284
+Podvin, P. & Lecomte, I., (1991).  Finite difference computation of traveltimes in very contrasted velocity models: 
+a massively parallel approach and its associated tools, Geophysical Journal International,105(1), 271–284
 
-Ter Braak, C. J., & Vrugt, J. A. 2008. Differential evolution Markov chain with snooker updater and fewer chains. 
+Ter Braak, C. J., & Vrugt, J. A. (2008). Differential evolution Markov chain with snooker updater and fewer chains. 
 Statistics and Computing, 18(4), 435-446.
 
-Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. 2009. Accelerating Markov chain Monte Carlo simulation by
+Vrugt, J. A., ter Braak, C., Diks, C., Robinson, B. A., Hyman, J. M., & Higdon, D. (2009). Accelerating Markov chain Monte Carlo simulation by
 differential evolution with self-adaptive randomized subspace sampling. International Journal of Nonlin ear Sciences and Numerical Simu-
 lation, 10(3), 273–290.
           
-Zahner, T., Lochbühler, T., Mariethoz, G., & Linde, N., 2016.  Image synthesis with graph cuts: a fast model proposal mechanism in probabilistic inversion,Geophysical Journal International,693204(2), 1179–1190   
+Zahner, T., Lochbühler, T., Mariethoz, G., & Linde, N., (2016).  Image synthesis with graph cuts: a fast model proposal mechanism in probabilistic inversion,Geophysical Journal International,693204(2), 1179–1190   
 
-Zhou,  Y.,  Johansen,  A.  M.,  &  Aston,  J.  A.,  2016.   Toward  automatic  model  comparison:  an adaptive sequential 
+Zhou,  Y.,  Johansen,  A.  M.,  &  Aston,  J.  A.,  (2016).   Toward  automatic  model  comparison:  an adaptive sequential 
 Monte Carlo approach, Journal of Computational and Graphical Statistics,69925(3), 701–726.      
+
+
 
 
 ## License
