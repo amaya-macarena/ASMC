@@ -7,7 +7,7 @@ This implementation (reffered to as ASMC-DREAM) uses the code presented by Laloy
 DREAMzs MCMC sampler (ter Braak and Vrugt, 2008; Vrugt, 2009; Laloy and Vrugt, 2012). The associated synthetic cross-hole ground 
 penetrating radar (GPR) tomography data first-arrival times are calculated using the time2d algorithm by Podvin & Lecomte (1991).
 
-In case you have any question and/or if you find a problem, please wirte me an email to macarena.amaya@unil.ch. 
+In case you have a question or if you find a bug, please write me an email to macarena.amaya@unil.ch. 
 
 ===                               
 
@@ -56,11 +56,11 @@ if  CaseStudy==2:
 
     # User defined parameters:
     
-    seq=2 # Number of particles (N)
-    thin=10  # Thinning parameter, rate for saving MCMC steps  
-    steps=10 # Iterations per intermediate distribution (K)
+    seq=40 # Number of particles (N)
+    thin=60  # Thinning parameter, rate for saving MCMC steps  
+    steps=60 # Iterations per intermediate distribution (K)
     jr_scale=10 # Starting value for de proposal scale
-    CESSf_div=0.9 # targeted CESS (CESS_op) 
+    CESSf_div=0.999996 # targeted CESS (CESS_op) 
     ESSf_div=0.5 # ESS treshold (ESS*) 
     AR_min=25.0 # Min acceptance rate before decreasing jr_scale
     jr_factor=0.2 # Fraction of the jr_scale that is decrease when the accepatnce rate gets lower than AR_min [0,1]
