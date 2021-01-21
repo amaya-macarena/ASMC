@@ -7,7 +7,7 @@ This implementation (reffered to as ASMC-DREAM) uses the code presented by Laloy
 DREAMzs MCMC sampler (ter Braak and Vrugt, 2008; Vrugt, 2009; Laloy and Vrugt, 2012). The associated synthetic cross-hole ground 
 penetrating radar (GPR) tomography data first-arrival times are calculated using the time2d algorithm by Podvin & Lecomte (1991).
 
-In case you have any question or if you find a bug, please write me an email to macarena.amaya@unil.ch. 
+In case you have a question or if you find a bug, please write me an email to macarena.amaya@unil.ch. 
 
 ===                               
 
