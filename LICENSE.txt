@@ -1,10 +1,10 @@
 Copyright (c) 2021 Macarena Amaya
-Licensed under CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike 4.0 International)
+The complete ASMC code is Licensed under CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike 4.0 International)
 You may obtain a copy of the License at:
 
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode   
 
-This code uses DREAMzs, an MCMC software that is licensed under the terms of the GNU General Public License as published by
+This code uses DREAMzs, an MCMC software written by Eric Laloy and Jasper A. Vrugt that is licensed under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 You may obtain a copy of the License at:
 
