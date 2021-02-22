@@ -32,7 +32,7 @@ forward_setup_0 folder: to use for forward solver parallel computation, contains
 
 
 ## GAN-based representation
-Pytorch and SGAN specifications
+The SGAN generator for prior proposals runs with Pytorch Deep Learning Library (in particular, we used Pytorch 1.0.1 version). 
 
 
 ## Performing the inversion
