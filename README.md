@@ -31,7 +31,7 @@ noise_vector_sigma1.npy : the noise that was added to the first arrival times.
 forward_setup_0 folder: to use for forward solver parallel computation, contains the times2d codes.
 
 
-## GAN-based representation
+## SGAN specifications
 The SGAN generator for prior proposals runs with Pytorch Deep Learning Library (in particular, we used Pytorch 1.0.1 version). 
 
 
