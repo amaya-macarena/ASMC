@@ -220,8 +220,6 @@ class Sampler:
         for zz in range(0,self.MCMCPar.DEpairs):
             self.MCMCPar.Table_JumpRate[:,zz] = 2.38/np.sqrt(2 * (zz+1) * np.linspace(1,self.MCMCPar.n,self.MCMCPar.n).T)
         
-#        # Change steps to make sure to get nice iteration numbers in first loop
-#        self.MCMCPar.steps = self.MCMCPar.steps - 1
         
         self.Z = np.zeros((np.floor(self.MCMCPar.m0 + self.MCMCPar.seq * (self.MCMCPar.ndraw - self.MCMCPar.m0) / (self.MCMCPar.seq * self.MCMCPar.k)).astype('int64')+self.MCMCPar.seq*100,self.MCMCPar.n+2))
         self.Z[:self.MCMCPar.m0,:self.MCMCPar.n] = Zinit[:self.MCMCPar.m0,:self.MCMCPar.n]
@@ -237,9 +235,7 @@ class Sampler:
             if self.MCMCPar.lik_sigma_est==True: # The inferred sigma must always occupy the last position in the parameter vector
                 fx0 = RunFoward(X[:,:-1],self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN)
             else:
-                fx0 = RunFoward(X,self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN) #the one we are using    
-        else:
-            fx0 = RunFoward(X,self.MCMCPar,self.Measurement,self.ModelName,self.Extra)
+                fx0 = RunFoward(X,self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN) #the one we use   
         
         # Compute likelihood from simulated data    
         of,log_p = CompLikelihood(X,fx0,self.MCMCPar,self.Measurement,self.Extra)
@@ -358,33 +354,23 @@ class Sampler:
 
             
         # Main sampling loop  
-#        print('Iter =',self.MCMCVar.Iter)
        
         while self.MCMCVar.Iter < self.MCMCPar.ndraw:
             start_time1c = time.time()
             print('Iter =',self.MCMCVar.Iter)
-            # Check that exactly MCMCPar.ndraw are done (uneven numbers this is impossible, but as close as possible)
-#            if (self.MCMCPar.steps * self.MCMCPar.seq) > self.MCMCPar.ndraw - self.MCMCVar.Iter:
-#                # Change MCMCPar.steps in last iteration 
-#                self.MCMCPar.steps = np.ceil((self.MCMCPar.ndraw - self.MCMCVar.Iter)/np.float(self.MCMCPar.seq)).astype('int64')
-            
-            
+                    
             #Calculate if it is necessary to modify jr_scale
             
             #Increase jr_scale if acceptance rate is too low
             if (prov_AR < self.MCMCPar.AR_min):
                 self.MCMCPar.jr_scale = self.MCMCPar.jr_scale*(1-self.MCMCPar.jr_factor)
                 
-            #elif (prov_AR > 40.0):
-                #self.MCMCPar.jr_scale = self.MCMCPar.jr_scale*(1+self.MCMCPar.jr_factor)
             
             # Initialize totaccept
             totaccept = 0
 
             jr_seq=np.append(jr_seq,self.MCMCPar.jr_scale)
                        
-
-
          
             # Loop a number of K mcmc steps for each intermediate distribution
 
@@ -397,8 +383,6 @@ class Sampler:
                 xold = np.array(self.MCMCVar.X[:self.MCMCPar.seq,:self.MCMCPar.n])
                 log_p_xold = np.array(self.MCMCVar.X[:self.MCMCPar.seq,self.MCMCPar.n + 2-1])
                 
-#                end_time = time.time()
-#                print("first part of the loop %5.4f seconds." % (end_time - start_time))
 
                 # Without replacement draw rows from Z for proposal creation
                 R=np.random.permutation(self.MCMCVar.m)
@@ -414,11 +398,9 @@ class Sampler:
 
                 # Generate candidate points (proposal) in each chain using either snooker or parallel direction update
                 xnew,self.MCMCVar.CR[:,gen_number] ,alfa_s = DreamzsProp(xold,Zoff,self.MCMCVar.CR[:,gen_number],self.MCMCPar,Update)
-                
-                #start_time = time.time()    
-                
-
-                # Get simulated data (done in parallel)
+                              
+                    
+                # Get simulated data (done in parallel if DoParalel='True')
                 if  self.CaseStudy > 0:
                     if self.MCMCPar.lik_sigma_est==True: # The inferred sigma must always occupy the last position in the parameter vector
                         fx_new = RunFoward(xnew[:,:-1],self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN)
@@ -427,21 +409,16 @@ class Sampler:
                 else:
                     fx_new = RunFoward(xnew,self.MCMCPar,self.Measurement,self.ModelName,self.Extra)
                 
-                #end_time = time.time()
-                #print("the FS at each iteration (nchains times) %5.4f seconds." % (end_time - start_time))    
-            
+              
                 # Compute the likelihood of each proposal in each chain
                 of_xnew,log_p_xnew = CompLikelihood(xnew,fx_new,self.MCMCPar,self.Measurement,self.Extra)
-
-         
+     
                 # Calculate the Metropolis ratio
                 accept = Metrop(self.MCMCPar,xnew,log_p_xnew,xold,log_p_xold,alfa_s,Extra,beta)
 
-     
                 # And update X and the model simulation
                 idx_X= np.argwhere(accept==1);idx_X=idx_X[:,0]
-                 
-                
+                         
                 if not(idx_X.size==0):
                      
                     self.MCMCVar.X[idx_X,:] = np.concatenate((xnew[idx_X,:],of_xnew[idx_X,:],log_p_xnew[idx_X,:]),axis=1)
@@ -489,15 +466,9 @@ class Sampler:
                 # Update total number of MCMC iterations
                 self.MCMCVar.Iter = self.MCMCVar.Iter + self.MCMCPar.seq
                 
-                #end_time = time.time()
-                #print("This sampling run took %5.4f seconds." % (end_time - start_time))
                 
              
             curr_log_lik=np.array(self.MCMCVar.X[:self.MCMCPar.seq,self.MCMCPar.n + 2-1])    
-
-#            # Reduce MCMCPar.steps to get rounded iteration numbers
-#            if self.MCMCVar.iteration == 2: 
-#                self.MCMCPar.steps = self.MCMCPar.steps + 1
 
             # Store acceptance rate
             self.OutDiag.AR[self.MCMCVar.iteration-1,:] = np.concatenate((np.array([self.MCMCVar.Iter]).reshape((1,1)), np.array([100 * totaccept/(self.MCMCPar.steps * self.MCMCPar.seq)]).reshape((1,1))),axis=1)
@@ -536,16 +507,13 @@ class Sampler:
             if beta>=1.:
                 break
            
-
             #Binary search test for next beta
             
             next_beta,incr,CESS_found  = binary_search(curr_log_lik,CESSf,beta,norm_weight,self.MCMCPar.betainc_seq,self.MCMCPar.seq)
             
             CESS_ev=np.append(CESS_ev,CESS_found)
-            
-            
+                 
             #Calculate importance weights for current beta 
-
     
             contribution = np.exp((next_beta - beta) * curr_log_lik)
             
@@ -606,12 +574,7 @@ class Sampler:
             
             increment=np.append(increment,incr)
             beta_run=np.append(beta_run,beta)   
-            
-            
-
-
-            end_time1c = time.time()
-#            print("This beta loop took %5.4f seconds." % (end_time1c - start_time1c))
+                       
 
         
         start_time22 = time.time()
