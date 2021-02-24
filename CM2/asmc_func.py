@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: Eric Laloy <elaloy@sckcen.be>, January 2017 / February 2018.
+Auxiliary functions for DREAM and ASMC
 """
 import numpy as np
 from scipy.stats import multivariate_normal
@@ -342,10 +342,8 @@ def DreamzsProp(xold,Zoff,CR,MCMCPar,Update):
         
 #        if not(MCMCPar.BoundHandling=='CRN'):
         xnew = BoundaryHandling(xnew,MCMCPar.lb,MCMCPar.ub,MCMCPar.BoundHandling)
-#        else:
-#            xnew = BoundaryHandling(xnew,MCMCPar.lb,MCMCPar.ub,MCMCPar.BoundHandling,MCMCPar.lb_tot_eros,MCMCPar.ub_tot_eros)
 
-    
+  
     return xnew, CR ,alfa_s
 
 
@@ -677,10 +675,6 @@ def binary_search(curr_log_lik,CESSf,beta,norm_weight,betainc_list,seq):
 		contribution_mup=np.exp(betainc_list[mid+1]*curr_log_lik)
 		CESS_mup=seq * (np.sum(norm_weight*contribution_mup))**2 / np.sum(norm_weight*contribution_mup**2) 
 
-#		if (mid+1 == len(beta_list)-1 and np.abs(CESS_m-CESSf) >= np.abs(CESS_mup-CESSf) ):
-#			found=True
-#			beta_found=1. 
-#			len(beta_list)-1
             
 		contribution_mdown=np.exp(betainc_list[mid-1]*curr_log_lik)
 		CESS_mdown=seq * (np.sum(norm_weight*contribution_mdown))**2 / np.sum(norm_weight*contribution_mdown**2) 
@@ -701,28 +695,7 @@ def binary_search(curr_log_lik,CESSf,beta,norm_weight,betainc_list,seq):
 				last = mid - 1
 			elif(np.abs(CESS_m-CESSf) >= np.abs(CESS_mup-CESSf)):
 				first = mid + 1	
-#		elif(beta_list[mid]-beta < 0 and CESS-CESSf > 0):
-#			first = mid + 1	
-#		elif(beta_list[mid]-beta < 0 and CESS-CESSf < 0):
-#			last = mid - 1
-#		print(found)
-#		print('mid',(first+last)//2)
-#		print('first',first)
-#		print('last',last)
-        
-        
-#	if(found == True):
-#		print('Found=True, position in the beta seq',mid)
-#		print('next_beta',beta_found)
-#		print('increment',inc_found)	
-#	if(found==False):
-#		print('found =False , current mid is:',mid)
 
-#		print('beta[mid] is',beta_list[mid])
-#		beta_found=beta_list[ind_beta+1]
-#		ind_found=ind_beta+1
-#		contribution_found=np.exp((beta_found-beta)*curr_log_lik)
-#		CESS_found=seq * (np.sum(norm_weight*contribution_found))**2 / np.sum(norm_weight*contribution_found**2)        
      
 	if (beta_found > 1.):
 		beta_found = 1.
@@ -760,12 +733,7 @@ def resampling(nweig,seq,X,npar,anc_prev,eve_prev):
         
 	ind=ind.astype('int')
     
-#	print('ancestral_prev',anc_prev)#\
-#	print('ancestral_curr',ind)
-#	print('X.shape',X.shape)
 
-        
-#	X=X[:,0:npar]
     
 	eve=np.zeros(seq)
     
