@@ -144,18 +144,8 @@ class Sampler:
             
             # Load measurements
 
-            #file_name='measurements.pkl'
             Measurement.Sigma=1 # Measurement error is 1 ns
-#            with open(file_name, 'rb') as fin:
-#                    tmp=pickle.load(fin)
-#                    Extra.z_true=tmp['z_true']
-#                    if DNN.threshold:
-#                        Extra.m_true=tmp['m_true']
-#                        Measurement.MeasData=tmp['d']
-#                    else:
-#                        Extra.m_true=tmp['m_true_cont']
-#                        Measurement.MeasData=tmp['d_cont']
-#                    del tmp
+
                     
             Measurement.MeasData=np.load('datatruemodel_sigma1.npy')        
             
@@ -255,13 +245,12 @@ class Sampler:
         del Zinit
         
         # Run forward model, if any this is done in parallel
-        if  self.CaseStudy > 1:
+        if  self.CaseStudy > 0:
             if self.MCMCPar.lik_sigma_est==True: # The inferred sigma must always occupy the last position in the parameter vector
                 fx0 = RunFoward(X[:,:-1],self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN)
             else:
                 fx0 = RunFoward(X,self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN) #the one we are using    
-        else:
-            fx0 = RunFoward(X,self.MCMCPar,self.Measurement,self.ModelName,self.Extra)
+
         
         # Compute likelihood from simulated data    
         of,log_p = CompLikelihood(X,fx0,self.MCMCPar,self.Measurement,self.Extra)
@@ -378,15 +367,11 @@ class Sampler:
         print("The initialization of SAMPLE (before the main loop) took %5.4f seconds." % (end_time1b - start_time1b))
             
         # Main sampling loop  
-#        print('Iter =',self.MCMCVar.Iter)
+
         
         while self.MCMCVar.Iter < self.MCMCPar.ndraw:
             start_time1c = time.time()
             print('Iter =',self.MCMCVar.Iter)
-            # Check that exactly MCMCPar.ndraw are done (uneven numbers this is impossible, but as close as possible)
-#            if (self.MCMCPar.steps * self.MCMCPar.seq) > self.MCMCPar.ndraw - self.MCMCVar.Iter:
-#                # Change MCMCPar.steps in last iteration 
-#                self.MCMCPar.steps = np.ceil((self.MCMCPar.ndraw - self.MCMCVar.Iter)/np.float(self.MCMCPar.seq)).astype('int64')
             
             
             #Calculate if it is necessary to modify jr_scale
@@ -394,15 +379,12 @@ class Sampler:
             #Increase jr_scale if acceptance rate is too low
             if (prov_AR < self.MCMCPar.AR_min):
                 self.MCMCPar.jr_scale = self.MCMCPar.jr_scale*(1-self.MCMCPar.jr_factor)
-                
-            #elif (prov_AR > 40.0):
-                #self.MCMCPar.jr_scale = self.MCMCPar.jr_scale*(1+self.MCMCPar.jr_factor)
+
             
             totaccept = 0
 
             jr_seq=np.append(jr_seq,self.MCMCPar.jr_scale)
-            
-            
+                    
          
             # Loop a number of times before calculating convergence diagnostic, etc.
             for gen_number in range(0,self.MCMCPar.steps):
@@ -415,8 +397,6 @@ class Sampler:
                 xold = np.array(self.MCMCVar.X[:self.MCMCPar.seq,:self.MCMCPar.n])
                 log_p_xold = np.array(self.MCMCVar.X[:self.MCMCPar.seq,self.MCMCPar.n + 2-1])
                 
-#                end_time = time.time()
-#                print("first part of the loop %5.4f seconds." % (end_time - start_time))
 
                 # Without replacement draw rows from Z for proposal creation
                 R=np.random.permutation(self.MCMCVar.m)
@@ -433,19 +413,15 @@ class Sampler:
                 # Generate candidate points (proposal) in each chain using either snooker or parallel direction update
                 xnew,self.MCMCVar.CR[:,gen_number] ,alfa_s = DreamzsProp(xold,Zoff,self.MCMCVar.CR[:,gen_number],self.MCMCPar,Update)
                 
-                #start_time = time.time()    
                 
-                # Get simulated data (done in parallel)
+                # Get simulated data (done in parallel if DoParalel='True')
                 if  self.CaseStudy > 1:
                     if self.MCMCPar.lik_sigma_est==True: # The inferred sigma must always occupy the last position in the parameter vector
                         fx_new = RunFoward(xnew[:,:-1],self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN)
                     else:
                         fx_new = RunFoward(xnew,self.MCMCPar,self.Measurement,self.ModelName,self.Extra,DNN=self.DNN) #the one we are using
-                else:
-                    fx_new = RunFoward(xnew,self.MCMCPar,self.Measurement,self.ModelName,self.Extra)
+
                 
-                #end_time = time.time()
-                #print("the FS at each iteration (nchains times) %5.4f seconds." % (end_time - start_time))    
             
                 # Compute the likelihood of each proposal in each chain
                 of_xnew,log_p_xnew = CompLikelihood(xnew,fx_new,self.MCMCPar,self.Measurement,self.Extra)
@@ -511,9 +487,6 @@ class Sampler:
                 
             curr_log_lik=np.array(self.MCMCVar.X[:self.MCMCPar.seq,self.MCMCPar.n + 2-1])             
                         
-#            # Reduce MCMCPar.steps to get rounded iteration numbers
-#            if self.MCMCVar.iteration == 2: 
-#                self.MCMCPar.steps = self.MCMCPar.steps + 1
 
             # Store acceptance rate
             self.OutDiag.AR[self.MCMCVar.iteration-1,:] = np.concatenate((np.array([self.MCMCVar.Iter]).reshape((1,1)), np.array([100 * totaccept/(self.MCMCPar.steps * self.MCMCPar.seq)]).reshape((1,1))),axis=1)
@@ -552,7 +525,6 @@ class Sampler:
             if beta>=1.:
                 break
    
-
             
             #Binary search test
             
@@ -563,9 +535,6 @@ class Sampler:
             
             #Calculate cumulative importance weight for current beta 
 
-
- #           next_beta=MCMCPar.beta_seq[beta_block_ind+1]
-#            weight= weight + (next_beta - beta) * log_p_xnew.flatten()
     
             contribution = np.exp((next_beta - beta) * curr_log_lik)
             
