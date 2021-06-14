@@ -548,7 +548,7 @@ class Sampler:
             print('ESS=',ESS)
             
             
-            if (ESS/self.MCMCPar.seq < MCMCPar.CESSf_div):
+            if (ESS/self.MCMCPar.seq < MCMCPar.ESSf_div):
                 
                 print('Resample')
                 
