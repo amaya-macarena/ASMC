@@ -572,7 +572,7 @@ class Sampler:
             ESS_ev=np.append(ESS_ev,ESS)
             
             
-            if (ESS/self.MCMCPar.seq < MCMCPar.CESSf_div):
+            if (ESS/self.MCMCPar.seq < MCMCPar.ESSf_div):
                 
                 print('Resample')
                 
