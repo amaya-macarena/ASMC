@@ -40,8 +40,7 @@ Modify the user-defined parameters and run run_asmc.py.
 
 
 ## Citation :
-Amaya, M., Linde, N., Laloy, E. under review. Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors 
-encoded with deep generative neural networks [submitted to Geophysical Journal International on December 2020].
+Amaya, M., Linde, N., & Laloy, E. (2021). Adaptive sequential Monte Carlo for posterior inference and model selection among complex geological priors. Geophysical Journal International, 226(2), 1220-1238.
 
 
 ## References:
