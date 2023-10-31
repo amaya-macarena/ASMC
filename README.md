@@ -12,7 +12,7 @@ CM2: tri-categorical training image representing braided-river aquifer deposits 
 ## Codes and files
 run_asmc.py : control the user-defined parameters and run the inversion. 
 
-asmc.py : main asmc code.
+asmc.py : main code.
 
 asmc_func.py : contain the auxiliar functions called by asmc.py.
 
